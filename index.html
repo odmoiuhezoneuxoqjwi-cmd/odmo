@@ -1,196 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tumoc Demo Pass</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f1eb;
-      color: #222;
-    }
-    .top {
-      background: #101820;
-      color: white;
-      padding: 18px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .support {
-      float: right;
-      color: #16c7b7;
-      font-size: 14px;
-    }
-    .card {
-      background: white;
-      margin: 18px;
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px #ccc;
-    }
-    .demo {
-      background: #ffdddd;
-      color: #b00000;
-      text-align: center;
-      padding: 8px;
-      font-weight: bold;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-    .tabs span {
-      padding: 8px 18px;
-      border-radius: 5px;
-      margin-right: 8px;
-      background: #eee;
-    }
-    .tabs .active {
-      background: #d8f5db;
-      color: #18955c;
-    }
-    button {
-      width: 100%;
-      padding: 16px;
-      background: #08bdb3;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-    .row {
-      margin: 12px 0;
-      font-size: 15px;
-      color: #777;
-    }
-    .value {
-      display: block;
-      color: #222;
-      font-size: 17px;
-      font-weight: bold;
-      margin-top: 4px;
-    }
-    .profile {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: bold;
-      float: right;
-    }
-    .qr {
-      display: block;
-      width: 210px;
-      margin: 25px auto 5px;
-    }
-    .popup-bg {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      align-items: center;
-      justify-content: center;
-    }
-    .popup {
-      background: white;
-      width: 80%;
-      max-width: 340px;
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-    }
-    .tick {
-      width: 55px;
-      height: 55px;
-      background: #16c76a;
-      color: white;
-      border-radius: 50%;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-    }
-  </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bus Pass</title>
+
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f3f0ea;color:#222}
+.top{background:#07131d;color:white;padding:18px;font-size:20px;font-weight:bold;position:sticky;top:0;z-index:5}
+.support{float:right;color:#10b8a8;font-size:15px}
+.card{background:white;margin:14px;padding:16px;border-radius:10px;box-shadow:0 1px 6px #ccc}
+.pass-head{display:flex;gap:14px;align-items:center}
+.logo{width:72px;height:72px;border-radius:50%;object-fit:cover}
+.tabs span{padding:8px 18px;border-radius:5px;margin-right:8px;background:#eee;display:inline-block}
+.tabs .active{background:#d9f3d5;color:#16853f}
+button{width:100%;padding:15px;background:#08bdb3;border:0;border-radius:7px;color:white;font-size:18px;font-weight:bold}
+.row{margin:11px 0;color:#777;font-size:15px}
+.value{display:block;color:#222;font-size:18px;font-weight:bold;margin-top:3px}
+.profile{width:90px;height:90px;border-radius:50%;object-fit:cover;float:right;margin-left:12px}
+.fare-box{display:flex;justify-content:space-between;align-items:end}
+.fare{font-size:38px;color:#333}
+.mail-btn{text-align:center;border:1.5px solid #12b9aa;color:#12a99c;border-radius:7px;padding:10px;margin:18px auto;width:75%;font-weight:bold}
+.green{background:#eef7df;padding:16px;border-radius:10px;margin-top:12px}
+.qr{display:block;width:215px;margin:28px auto 10px}
+.terms{background:white;margin:14px;padding:18px;border-radius:9px;font-size:20px}
+.details{display:none;font-size:14px;color:#555;margin-top:12px;line-height:1.5}
+.popup-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:20;align-items:center;justify-content:center}
+.popup{background:white;width:84%;max-width:360px;padding:25px;border-radius:16px;text-align:center}
+.tick{width:55px;height:55px;background:#35b34a;color:white;border-radius:50%;margin:auto;display:flex;align-items:center;justify-content:center;font-size:32px}
+.unlock{position:fixed;inset:0;background:#07131d;z-index:50;display:flex;align-items:center;justify-content:center}
+.unlock-box{background:white;padding:28px;border-radius:16px;width:80%;max-width:330px;text-align:center}
+input,select{padding:13px;border:1px solid #ccc;border-radius:8px;font-size:18px}
+.pinbox{width:48px;height:48px;text-align:center;margin:5px;font-size:24px}
+.camera{height:46vh;background:linear-gradient(140deg,#222,#777);color:white;display:flex;align-items:center;justify-content:center;font-size:18px}
+.bottom-sheet{background:white;border-radius:22px 22px 0 0;padding:24px;margin-top:-20px;position:relative}
+</style>
 </head>
+
 <body>
 
-  <div class="top">
-    ← Your Bus Pass
-    <span class="support">Support</span>
+<div class="unlock" id="unlock">
+  <div class="unlock-box">
+    <h2>Enter Password</h2>
+    <input id="pass" type="password" placeholder="Password">
+    <br><br>
+    <button onclick="unlock()">Unlock</button>
+    <p id="unlockErr" style="color:red"></p>
   </div>
+</div>
 
-  <div class="card">
-    <div class="demo">DEMO / NOT VALID PASS</div>
+<div class="top">← Your Bus Pass <span class="support">Support</span></div>
+
+<div class="card">
+  <div class="pass-head">
+    <img src="logo.png" class="logo">
     <h2>Ordinary Service<br>Monthly Pass</h2>
-
-    <div class="tabs">
-      <span class="active">Monthly</span>
-      <span>Ordinary</span>
-    </div>
-
-    <p><b>Pass ID:</b> TPASS91098668</p>
-
-    <button onclick="showPopup()">Validate Pass</button>
-    <p style="text-align:center;color:#09a99f;">ⓘ How to Validate Your Pass?</p>
   </div>
 
-  <div class="card">
-    <h2>Booking Details</h2>
+  <div class="tabs">
+    <span class="active">Monthly</span>
+    <span>Ordinary</span>
+  </div>
 
-    <div class="profile">L</div>
+  <p>Pass ID: <b>TPASS91098668</b></p>
+  <button onclick="openValidate()">Validate Pass</button>
+  <p style="text-align:center;color:#09a99f">ⓘ How to Validate Your Pass?</p>
+</div>
 
-    <div class="row">Passenger name <span class="value">Likhith</span></div>
-    <div class="row">Identification type <span class="value">Aadhar Card</span></div>
-    <div class="row">Identification number (Last 4 digits) <span class="value">4942</span></div>
-    <div class="row">Pass purchase date <span class="value">16 May 2026, 6:55 AM</span></div>
+<div class="card">
+  <h2>Booking Details</h2>
+  <img src="profile.jpg" class="profile">
+
+  <div class="row">Passenger name <span class="value">Likhith D</span></div>
+  <div class="row">Identification type <span class="value">Aadhar Card</span></div>
+  <div class="row">Identification number (Last 4 digits) <span class="value">4942</span></div>
+  <div class="row">Pass purchase date <span class="value">16 May 2026, 06:55 AM</span></div>
+  <div class="row">Pass valid from <span class="value">16 May 2026, 12:00 AM</span></div>
+
+  <div class="fare-box">
     <div class="row">Pass valid till <span class="value">16 June 2026, 12:00 AM</span></div>
-    <div class="row">Pass fare <span class="value">₹ 1200.0</span></div>
+    <div>
+      <u>Pass fare</u><br>
+      <span class="fare">₹ 1200.0</span>
+    </div>
   </div>
 
-  <div class="card">
-    <div style="background:#e7f5dd;padding:12px;border-radius:8px;color:#3c8b30;">
-      Sent mail to<br><b>likhithdgowda00@gmail.com</b> ✓
-    </div>
+  <div class="mail-btn">✉ Generate mail receipt</div>
 
+  <div class="green">
     <div class="row">Last Validated <span class="value" id="time"></span></div>
-    <div class="row">Bus Number <span class="value">BMTC BUS KA-------</span></div>
+    <div class="row">Bus Number <span class="value">BMTC BUS KA57F0021</span></div>
     <div class="row">Validated By <span class="value">Self</span></div>
-
-    <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=DEMO-NOT-VALID-PASS">
-    <div class="demo">DEMO QR - NOT FOR TRAVEL</div>
   </div>
 
-  <div class="popup-bg" id="popup">
-    <div class="popup">
-      <div class="tick">✓</div>
-      <h2>Self verification done successfully</h2>
-      <p>Pass number <b>TPASS91098668</b></p>
-      <p>Pass type <b>monthly</b></p>
-      <p>Pass valid till <b>16 June 2026, 12:00 AM</b></p>
-      <hr>
-      <h2>Pass fare ₹ 1200.0</h2>
-      <button onclick="hidePopup()">Okay</button>
-      <p style="color:red;font-weight:bold;">DEMO / NOT VALID PASS</p>
+  <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=230x230&data=Bangalore-Metropolitan-Demo-Pass-Project">
+</div>
+
+<div class="terms" onclick="toggleDetails()">
+  Terms and Conditions Apply ˅
+  <div class="details" id="details">
+    Demo Project Details: This page is created only for school/college presentation and UI demonstration. It is not an official travel pass and cannot be used for travel.
+  </div>
+</div>
+
+<div class="popup-bg" id="validate">
+  <div style="width:100%;height:100%;background:#111">
+    <div class="top">← Your Bus Pass <span class="support">Support</span></div>
+    <div class="camera">Camera preview for QR scan</div>
+
+    <div class="bottom-sheet">
+      <h2>Enter bus number</h2>
+      <select style="width:100%;margin-bottom:22px">
+        <option>Select bus number prefix</option>
+        <option>KA57</option>
+      </select>
+
+      <input class="pinbox" maxlength="1" oninput="moveNext(this,0)">
+      <input class="pinbox" maxlength="1" oninput="moveNext(this,1)">
+      <input class="pinbox" maxlength="1" oninput="moveNext(this,2)">
+      <input class="pinbox" maxlength="1" oninput="moveNext(this,3)">
+      <p id="pinErr" style="color:red"></p>
     </div>
   </div>
+</div>
 
-  <script>
-    document.getElementById("time").innerText = new Date().toLocaleString();
+<div class="popup-bg" id="success">
+  <div class="popup">
+    <div class="tick">✓</div>
+    <h2>Self verification done successfully</h2>
+    <p>Pass number <b>TPASS91098668</b></p>
+    <p>Pass type <b>monthly</b></p>
+    <p>Pass valid till <b>16 June 2026, 12:00 AM</b></p>
+    <hr>
+    <h2>Pass fare ₹ 1200.0</h2>
+    <button onclick="closeSuccess()">Okay</button>
+  </div>
+</div>
 
-    function showPopup() {
-      document.getElementById("popup").style.display = "flex";
+<script>
+document.getElementById("time").innerText = new Date().toLocaleString();
+
+function unlock(){
+  if(document.getElementById("pass").value==="4942"){
+    document.getElementById("unlock").style.display="none";
+  }else{
+    document.getElementById("unlockErr").innerText="Wrong password";
+  }
+}
+
+function openValidate(){
+  document.getElementById("validate").style.display="block";
+  document.querySelectorAll(".pinbox")[0].focus();
+}
+
+function moveNext(el,i){
+  el.value = el.value.replace(/[^0-9]/g,"");
+  let boxes=document.querySelectorAll(".pinbox");
+  if(el.value && i<3) boxes[i+1].focus();
+
+  let code="";
+  boxes.forEach(b=>code+=b.value);
+
+  if(code.length===4){
+    if(code==="4942"){
+      document.getElementById("validate").style.display="none";
+      document.getElementById("success").style.display="flex";
+    }else{
+      document.getElementById("pinErr").innerText="Invalid number";
+      boxes.forEach(b=>b.value="");
+      boxes[0].focus();
     }
+  }
+}
 
-    function hidePopup() {
-      document.getElementById("popup").style.display = "none";
-    }
-  </script>
+function closeSuccess(){
+  document.getElementById("success").style.display="none";
+}
+
+function toggleDetails(){
+  let d=document.getElementById("details");
+  d.style.display = d.style.display==="block" ? "none" : "block";
+}
+</script>
 
 </body>
 </html>
