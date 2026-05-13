@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tumoc Demo Pass</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f1eb;
+      color: #222;
+    }
+    .top {
+      background: #101820;
+      color: white;
+      padding: 18px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .support {
+      float: right;
+      color: #16c7b7;
+      font-size: 14px;
+    }
+    .card {
+      background: white;
+      margin: 18px;
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #ccc;
+    }
+    .demo {
+      background: #ffdddd;
+      color: #b00000;
+      text-align: center;
+      padding: 8px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .tabs span {
+      padding: 8px 18px;
+      border-radius: 5px;
+      margin-right: 8px;
+      background: #eee;
+    }
+    .tabs .active {
+      background: #d8f5db;
+      color: #18955c;
+    }
+    button {
+      width: 100%;
+      padding: 16px;
+      background: #08bdb3;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .row {
+      margin: 12px 0;
+      font-size: 15px;
+      color: #777;
+    }
+    .value {
+      display: block;
+      color: #222;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+    .profile {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: bold;
+      float: right;
+    }
+    .qr {
+      display: block;
+      width: 210px;
+      margin: 25px auto 5px;
+    }
+    .popup-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      align-items: center;
+      justify-content: center;
+    }
+    .popup {
+      background: white;
+      width: 80%;
+      max-width: 340px;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+    }
+    .tick {
+      width: 55px;
+      height: 55px;
+      background: #16c76a;
+      color: white;
+      border-radius: 50%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top">
+    ← Your Bus Pass
+    <span class="support">Support</span>
+  </div>
+
+  <div class="card">
+    <div class="demo">DEMO / NOT VALID PASS</div>
+    <h2>Ordinary Service<br>Monthly Pass</h2>
+
+    <div class="tabs">
+      <span class="active">Monthly</span>
+      <span>Ordinary</span>
+    </div>
+
+    <p><b>Pass ID:</b> TPASS91098668</p>
+
+    <button onclick="showPopup()">Validate Pass</button>
+    <p style="text-align:center;color:#09a99f;">ⓘ How to Validate Your Pass?</p>
+  </div>
+
+  <div class="card">
+    <h2>Booking Details</h2>
+
+    <div class="profile">L</div>
+
+    <div class="row">Passenger name <span class="value">Likhith</span></div>
+    <div class="row">Identification type <span class="value">Aadhar Card</span></div>
+    <div class="row">Identification number (Last 4 digits) <span class="value">4942</span></div>
+    <div class="row">Pass purchase date <span class="value">16 May 2026, 6:55 AM</span></div>
+    <div class="row">Pass valid till <span class="value">16 June 2026, 12:00 AM</span></div>
+    <div class="row">Pass fare <span class="value">₹ 1200.0</span></div>
+  </div>
+
+  <div class="card">
+    <div style="background:#e7f5dd;padding:12px;border-radius:8px;color:#3c8b30;">
+      Sent mail to<br><b>likhithdgowda00@gmail.com</b> ✓
+    </div>
+
+    <div class="row">Last Validated <span class="value" id="time"></span></div>
+    <div class="row">Bus Number <span class="value">BMTC BUS KA-------</span></div>
+    <div class="row">Validated By <span class="value">Self</span></div>
+
+    <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=DEMO-NOT-VALID-PASS">
+    <div class="demo">DEMO QR - NOT FOR TRAVEL</div>
+  </div>
+
+  <div class="popup-bg" id="popup">
+    <div class="popup">
+      <div class="tick">✓</div>
+      <h2>Self verification done successfully</h2>
+      <p>Pass number <b>TPASS91098668</b></p>
+      <p>Pass type <b>monthly</b></p>
+      <p>Pass valid till <b>16 June 2026, 12:00 AM</b></p>
+      <hr>
+      <h2>Pass fare ₹ 1200.0</h2>
+      <button onclick="hidePopup()">Okay</button>
+      <p style="color:red;font-weight:bold;">DEMO / NOT VALID PASS</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("time").innerText = new Date().toLocaleString();
+
+    function showPopup() {
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function hidePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
